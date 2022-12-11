@@ -23,18 +23,17 @@ $objKonten->__construct();
 		}
 
 		img {
-			width: 200px;
-			height: 200px;
-
+			width: 400px;
+			height: 400px;
 		}
 
 		.gallery {
 			list-style: none;
 			display: grid;
-			grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 0.5fr;
-			grid-template-rows: auto auto auto;
+			grid-template-columns: auto;
 			grid-gap: 10px;
 		}
+
 
 		a {
 			font-weight: bold;
@@ -44,7 +43,29 @@ $objKonten->__construct();
 			color: red;
 		}
 
+		@media all and (min-width:700px) {
+			.gallery {
+				grid-template-columns: auto auto;
+				grid-template-rows: auto;
+			}
+
+			img {
+				width: 300px;
+				height: 300px;
+			}
+		}
+
 		@media all and (min-width:1000px) {
+			.gallery {
+				grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 0.5fr;
+				grid-template-rows: auto auto auto;
+			}
+
+			img {
+				width: 200px;
+				height: 200px;
+			}
+
 			#konten1 {
 				grid-column: 2/3;
 			}
@@ -93,7 +114,6 @@ $objKonten->__construct();
 				grid-column: 5/6;
 			}
 		}
-
 
 		header {
 			text-align: right;
