@@ -7,9 +7,9 @@ class login extends orangtua
         parent::__construct();
     }
 
-    public function dologin($username, $password)
+    public function Login($username, $password)
     {
-        $sql = "SELECT * FROM users WHERE username=? and password=?";
+        $sql = "SELECT * FROM user WHERE username=? AND password=?";
         $stmt = $this->mysqli->prepare(($sql));
         $stmt->bind_param("ss", $username, $password);
         $stmt->execute();

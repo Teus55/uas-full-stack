@@ -1,18 +1,28 @@
 <?php
 require_once("parent.php");
-class login extends orangtua
+class like extends orangtua
 {
     public function __construct()
     {
         parent::__construct();
     }
 
-    public function dologin($username, $password)
-    {
-        $sql = "SELECT * FROM users WHERE username=? and password=?";
-        $stmt = $this->mysqli->prepare(($sql));
-        $stmt->bind_param("ss", $username, $password);
+    public function insertLike($username, $idkonten){
+        $sql = "insert into like (username, idkonten) VALUES (?, ?)";
+        $stmt = $this->mysqli->prepare($sql);
+        $stmt->bind_param("si", $username, $idkonten);
         $stmt->execute();
-        return $stmt->get_result();
+        $res = $stmt->get_result();
+        return $res;
+    }
+
+    public function getLike($idkonten)
+    {
+        $sql = "Select * From like Where idkonten=?";
+        $stmt = $this->mysqli->prepare($sql);
+        $stmt->bind_param("i", $idkonten);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        return $res;
     }
 }
