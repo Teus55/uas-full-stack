@@ -39,7 +39,7 @@ session_destroy();
 		<div class="login">
 			<input type="text" id="username" name="username" placeholder="Username">&nbsp;&nbsp;&nbsp;
 			<input type="password" id="password" name="password" placeholder="Password">&nbsp;&nbsp;&nbsp;
-			<input id="submit" type="submit" value="Submit">
+			<input id="submit" type="submit" value="Log-in">
 		</div>
 	</div>
 	<script type="text/javascript">

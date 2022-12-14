@@ -3,6 +3,8 @@ session_start();
 if (!isset($_SESSION['username'])) {
 	header("location:login.php");
 }
+
+$usr_name =  $_SESSION['username'];
 require_once("class/konten.php");
 $objKonten = new konten();
 $objKonten->__construct();
@@ -14,6 +16,7 @@ $objKonten->__construct();
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<title>Index</title>
 	<style type="text/css">
 		body {
@@ -129,19 +132,37 @@ $objKonten->__construct();
 		$('body').on('click', '#logout', function() {
 			window.location.href = 'login.php';
 		});
+
+		function f1(objButton){  
+    		
+    		var idkont = objButton.value;
+    		var idusr = "<?php echo $usr_name; ?>"; // ambil variable php -> menjadi var
+			var konten = "idkonten"+idkont
+    		$.post('like_proses.php', {
+				idkont: idkont,
+				idusr: idusr,
+			}).done(function(data) {
+				$('#idkonten'+idkont).html(data+" likes");
+				$('#btnkonten'+idkont).attr('disabled', 'disabled');
+			});
+		}
+		
 		$(document).ready(function() {
 			function loadPage(page) {
+				var idusr = "<?php echo $usr_name; ?>";
 				$.ajax({
 					url: "pagenumber.php",
 					type: "POST",
 					data: {
-						page_no: page
+						page_no: page,
+						iduser: idusr
 					},
 					success: function(data) {
 						$(".all-data").html(data);
 					}
 				});
 			}
+			
 			loadPage();
 
 			$(document).on('click', '#pagenumber a', function(e) {
@@ -150,6 +171,7 @@ $objKonten->__construct();
 
 				loadPage(page_id);
 			})
+
 		});
 	</script>
 </body>
